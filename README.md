@@ -1,7 +1,9 @@
 # ConfigSys
 
-Extremely simple but powerful configuration system for machine learning Systems.  
-Provides a simple way to use nested dataclasses to specify an arbitrary complex configuration.  Configs can  
+Extremely simple and powerful configuration system for machine learning systems.  
+Provides a simple way to use nested dataclasses to specify an arbitrary complex configuration.  Configs can be
+easily serialized to and from yaml files, although we highly recommend specifying configs in **python** rather than yaml 
+since you get all the benefits of an IDE (e.g. autocomplete, type checking, etc.).
 
 see configsys/example.py
 
@@ -10,7 +12,7 @@ from dataclasses import dataclass
 
 from configsys.config import ConfigMixin
 
-
+# We recommend using kw_only=True to make sure Configs are specified explicitly
 class ImageDataLoader:
     @dataclass(kw_only=True)
     class Config(ConfigMixin):
@@ -66,7 +68,8 @@ class Transformer:
         return x
 
 
-# Configs do not have to be an attribute of their target class
+# Configs do not necessarily have to be an attribute of their target class
+# This is usually the case when the target is class that you did not write
 @dataclass(kw_only=True)
 class TrainerConfig(ConfigMixin):
     _target_ = "configsys.example.Trainer"

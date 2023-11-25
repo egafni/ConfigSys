@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from configsys.config import ConfigMixin
 
 
+# We recommend using kw_only=True to make sure Configs are specified explicitly
 class ImageDataLoader:
     @dataclass(kw_only=True)
     class Config(ConfigMixin):
@@ -58,7 +59,8 @@ class Transformer:
         return x
 
 
-# Configs do not have to be an attribute of their target class
+# Configs do not necessarily have to be an attribute of their target class
+# This is usually the case when the target is class that you did not write
 @dataclass(kw_only=True)
 class TrainerConfig(ConfigMixin):
     _target_ = "configsys.example.Trainer"
