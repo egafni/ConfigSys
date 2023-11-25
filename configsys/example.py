@@ -1,11 +1,3 @@
-# ConfigSys
-
-Extremely simple but powerful configuration system for machine learning Systems.  
-Provides a simple way to use nested dataclasses to specify an arbitrary complex configuration.  Configs can  
-
-see configsys/example.py
-
-```python
 from dataclasses import dataclass
 
 from configsys.config import ConfigMixin
@@ -108,6 +100,3 @@ def main(outdir):
 
 if __name__ == '__main__':
     main()
-
-
-```

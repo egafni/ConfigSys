@@ -10,7 +10,7 @@ import fsspec  # type: ignore[import]
 import yaml
 from dacite import DaciteError
 
-from afi.utils.misc_utils import classproperty, get_module_and_class_names, import_and_instantiate
+from configsys.utils import classproperty, get_module_and_class_names, import_and_instantiate
 
 
 class _REQUIRED:
