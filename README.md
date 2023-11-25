@@ -7,6 +7,13 @@ since you get all the benefits of an IDE (e.g. autocomplete, type checking, etc.
 
 see configsys/example.py
 
+# Install
+```bash
+
+pip install configsys
+
+```
+
 ```python
 from dataclasses import dataclass
 
