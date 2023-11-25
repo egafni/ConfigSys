@@ -1,5 +1,6 @@
 import dataclasses
 import os
+import warnings
 from copy import deepcopy
 from dataclasses import Field, dataclass, fields
 from importlib import import_module
@@ -56,8 +57,11 @@ class ConfigMixin:
     def __post_init__(self):
         check_required(self)
 
+        assert hasattr(self, '_target_'), '_target_ attribute is required for all configs'
+
         for field in self.fields:
             if field.name == "unique_config_id":
+                warnings.warn('unique_config_id is deprecated, use _target_ instead', DeprecationWarning)
                 # require that unique_config_id is set to the default value so that we're instantiating
                 # the correct class.  This is required by dacite's UnionType[] support, which continues trying each
                 # type after a failure

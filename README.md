@@ -1,9 +1,10 @@
 # ConfigSys
 
-Extremely simple and powerful configuration system for machine learning systems.  
+Very simple yet powerful configuration system for machine learning projects.
+
 Provides a simple way to use nested dataclasses to specify an arbitrary complex configuration.  Configs can be
-easily serialized to and from yaml files, although we highly recommend specifying configs in **python** rather than yaml 
-since you get all the benefits of an IDE (e.g. autocomplete, type checking, etc.).
+easily serialized to and from yaml files, although we generally specify Configs in **python** rather than yaml 
+since we get all the benefits of an IDE (e.g. autocomplete, type checking, etc.).
 
 see configsys/example.py
 
@@ -115,9 +116,6 @@ def main(outdir):
         trainer_config2 = TrainerConfig.from_yaml_file(f"{outdir}/trainer_config.yaml")
         assert config == trainer_config2
 
-
-if __name__ == '__main__':
-    main()
 
 
 ```
