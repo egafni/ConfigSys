@@ -167,9 +167,3 @@ class ConfigMixin:
 
     def copy(self):
         return deepcopy(self)
-
-
-def are_configs_equal(first: dict, second: dict) -> bool:
-    return {key: value for key, value in first.items() if key not in ["name", "unique_id"]} == {
-        key: value for key, value in second.items() if key not in ["name", "unique_id"]
-    }

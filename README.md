@@ -132,3 +132,11 @@ def main(outdir):
 
 
 ```
+
+# Publishing
+
+```bash
+poetry build
+poetry publish
+```
+

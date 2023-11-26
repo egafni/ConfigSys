@@ -1,6 +1,5 @@
 import dataclasses
 from importlib import import_module
-from inspect import isclass
 
 import fsspec  # type: ignore[import]
 
@@ -26,12 +25,6 @@ def classproperty(func):
     return ClassPropertyDescriptor(func)
 
 
-def are_configs_equal(first: dict, second: dict) -> bool:
-    return {key: value for key, value in first.items() if key not in ["name", "unique_id"]} == {
-        key: value for key, value in second.items() if key not in ["name", "unique_id"]
-    }
-
-
 class ClassPropertyDescriptor:
     """copied from https://stackoverflow.com/questions/5189699/how-to-make-a-class-property"""
 
@@ -55,22 +48,6 @@ class ClassPropertyDescriptor:
             func = classmethod(func)
         self.fset = func
         return self
-
-
-def get_subclasses_from_object_dict(class_: type, object_dict: dict) -> dict[str, type]:
-    """
-    Returns all of the subclasses of class_ that are inside object_dict, which is usually passed in as the
-    globals() of the caller.
-    Useful for getting all of the subclasses of a class that are defined in a module.
-    :param class_: A class
-    :param object_dict: an object dictionary (for ex the output of globals())
-    :return: dict of {"class_name": class, ...} where class is as subtype of class_
-    """
-    return {
-        var_name: variable
-        for var_name, variable in object_dict.items()
-        if isclass(variable) and issubclass(variable, class_) and var_name != class_.__name__
-    }
 
 
 def import_and_instantiate(import_path: str, *args, **kwargs):
