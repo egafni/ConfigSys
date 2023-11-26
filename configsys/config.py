@@ -57,8 +57,6 @@ class ConfigMixin:
     def __post_init__(self):
         check_required(self)
 
-        assert hasattr(self, '_target_'), '_target_ attribute is required for all configs'
-
         for field in self.fields:
             if field.name == "unique_config_id":
                 warnings.warn('unique_config_id is deprecated, use _target_ instead', DeprecationWarning)
@@ -124,7 +122,7 @@ class ConfigMixin:
         return cls.from_dict(yaml.load(yaml_string, Loader=yaml.Loader))
 
     def to_yaml(self) -> str:
-        return yaml.dump(self.to_dict())  # type: ignore[no-any-return]
+        return yaml.dump(self)  # type: ignore[no-any-return]
 
     def to_yaml_file(self, path):
         with fsspec.open(path, "w") as fp:
@@ -141,6 +139,7 @@ class ConfigMixin:
         """
         Instantiates the target class this config belongs to
         The target class must be specified in self._target_
+        Target will be instantiated with the config as the first argument
         """
         assert hasattr(self, "_target_"), "_target_ attribute was not specified for this config"
         return import_and_instantiate(self._target_, config=self, *args, **kwargs)  # type: ignore

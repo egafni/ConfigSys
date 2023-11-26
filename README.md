@@ -1,12 +1,25 @@
 # ConfigSys
 
-Very simple yet powerful configuration system for machine learning projects.
+Very simple yet powerful configuration system for machine learning projects.  The whole thing is
+around 170 lines of code, give it a look!
 
 Provides a simple way to use nested dataclasses to specify an arbitrary complex configuration.  Configs can be
-easily serialized to and from yaml files, although we generally specify Configs in **python** rather than yaml 
-since we get all the benefits of an IDE (e.g. autocomplete, type checking, etc.).
+easily serialized to and from yaml files and back to nested dataclasses.
 
 see configsys/example.py
+
+For a more complex example see [this](http://github.com/egafni/ai) repo.
+
+# Core Beliefs
+
+Specifying configs in python is **way** better than raw yaml text files.
+* You get all the help of the IDE (e.g. autocomplete, type checking, refactoring, etc.)
+* You can use python logic (for loops, string replacement, functions, itertools, etc.) 
+  to decide your hyper-parameters and experiments.
+
+The CLI is a terrible way to specify hyper-parameters or complex configs
+* CLI configuration is basically an attempt at taking a 1 line string and serializing it into a python nested datastructure
+* It is much easier to just create a python file which configures and runs (or launches) your jobs.
 
 # Install
 ```bash
@@ -14,7 +27,7 @@ see configsys/example.py
 pip install configsys
 
 ```
-
+# Example Usage
 ```python
 from dataclasses import dataclass
 
